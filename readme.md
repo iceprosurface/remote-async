@@ -1,6 +1,5 @@
 ## remote async 
-[![Build Status](https://travis-ci.org/iceprosurface/remote-async.svg?branch=master)](https://travis-ci.org
-/iceprosurface/remote-async) [![codecov](https://codecov.io/gh/iceprosurface/remote-async/branch/master/graph/badge.svg)](https://codecov.io/gh/iceprosurface/remote-async)
+[![Build Status](https://travis-ci.org/iceprosurface/remote-async.svg?branch=master)](https://travis-ci.org/iceprosurface/remote-async) [![codecov](https://codecov.io/gh/iceprosurface/remote-async/branch/master/graph/badge.svg)](https://codecov.io/gh/iceprosurface/remote-async)
 
 
 ## why
