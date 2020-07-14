@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "sourceMap": false,
+    // 模块配置
+    "module": "commonjs",
+    // 是否默认禁用 any
+    "noImplicitAny": true,
+    "types": [
+      "jest",
+      "es6"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./types/*"
+      ]
+    },
+    // 编译目标
+    "target": "es6",
+    // 输出目录
+    "outDir": "dist",
+    // 是否自动创建类型声明
+    "declaration": true
+  },
+  // 此配置生效范围
+  "include": [
+    "src/**/*"
+  ]
+}
