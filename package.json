@@ -1,7 +1,7 @@
 {
   "name": "remote-async",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/remoteAsync.esm.js",
   "license": "MIT",
   "scripts": {
     "test": "jest --verbose",
@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.4",
+    "codecov": "^3.7.0",
     "jest": "^26.1.0",
     "jest-html-reporter": "^3.1.3",
     "prettier": "^2.0.5",

@@ -11,7 +11,7 @@ The server can be use under any protocol like socket，web worker event .etc
 ```javascript
 // server
 var io = require('socket.io')(http);
-var Server = require('@platform/remote-async');
+var Server = require('remote-async');
 const serverMain = new Server();
 io.on('connection', (socket) => {
   serverMain.registerSender((data) => io.emit('async-data', data));
@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
 
 ```javascript
 // client
-import Server from '@platform/remote-async';
+import Server from 'remote-async';
 const serverClient = new Server();
 const socket = io();
 socket.on('connection', (socket) => {

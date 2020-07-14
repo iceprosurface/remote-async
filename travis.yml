@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - '11'
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - ~/.npm
+    - ~/.cache
+
+script:
+  - npm run test:coverage
+  - codecov ./coverage/clover.xml
+
+branches:
+  only:
+    - master
+    - develop
