@@ -11,6 +11,13 @@
   "dependencies": {
     "rollup-plugin-sourcemaps": "^0.6.2"
   },
+  "files": [
+    "/lib",
+    "/src",
+    "/package.json",
+    "/readme.md",
+    "/LICENSE"
+  ],
   "devDependencies": {
     "@types/jest": "^26.0.4",
     "codecov": "^3.7.0",
