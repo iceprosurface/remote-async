@@ -1,4 +1,4 @@
-import typescript from "rollup-plugin-typescript";
+import typescript from "rollup-plugin-typescript2";
 import sourceMaps from "rollup-plugin-sourcemaps";
 export default {
   input: "./src/index.ts",

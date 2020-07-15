@@ -1,12 +1,18 @@
 language: node_js
 node_js:
-  - '11'
-
+- '11'
 script:
-  - npm run test:coverage
-  - codecov ./coverage/clover.xml
-
+- npm run test:coverage
+- codecov ./coverage/clover.xml
 branches:
   only:
-    - master
-    - develop
+  - master
+  - develop
+deploy:
+  provider: npm
+  email: iceprosurface@gmail.com
+  api_key:
+    secure: 1dh67MLE6YDd5tfHlXlltwWG74bjEC1scwCfFFy504VcXW1uz5G5lYWs5apLdrZHQHUbMQpQsvo4nKj3LdhAarQxqBZbjGMm7RXFJDwForG5HJzENofJ+emtNQrH/WXsOzQ2fu81PtWJ4NYTusQafeBEI9JplcOI1PmXoY1XEJHTHYUw5+RafR2UfakmuHqrMv0vCKWvwOLYncJUJYxyMD94cDLiP4Q3obeJGJ0S8jcGMsejg+ExYkBilRW9dOCMB0iuA/1SVVXYafKOhahPuadNdR98xkCbhf0+B+8KyYl8XhnUhs6S0bAs+dpy3zB3fLSKWamAP5CDgTra6Sqo1tJ2HpAu/X0Mz/dBlF3Kyopsr8qauFDT76H+1MpRoybCCkimLqFDSwKwpd/wkZt+9XBlFQQgSwi7l14n8UdtKDZr/kP1ktB4ERj6a+OtSoZV7KeT8eaT8vDqTNZqQgQ918BYxjGdVPAuAdYww3qtlTZdwcepoxvCY8DU52scOr2pn8s7LdxJRsx411qH3jh665eo3PN+nbEG2H9d9LM3yGqsnFHG+f8s9Tmt5OxycCDdPxCLbZWsBsg65Bm5B+CLW/7pjJRaQ4XZAOUKBpALNxzVZ3T6YxaDpQF9EoSNSKomaxQGBYd/MRaiZMSkyAIOlkmCy5iwJPpL5cfBRMlgEPw=
+  on:
+    tags: true
+    repo: iceprosurface/remote-async
