@@ -1,6 +1,6 @@
 {
   "name": "remote-async",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "lib/remoteAsync.esm.js",
   "license": "MIT",
   "scripts": {
