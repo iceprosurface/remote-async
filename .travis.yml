@@ -8,6 +8,7 @@ branches:
   only:
   - master
   - develop
+  - /^v\d+\.\d+\.\d+.*$/
 deploy:
   provider: npm
   email: iceprosurface@gmail.com
