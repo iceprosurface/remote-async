@@ -2,12 +2,11 @@
   "compilerOptions": {
     "sourceMap": false,
     // 模块配置
-    "module": "commonjs",
+    "module": "ES2015",
     // 是否默认禁用 any
     "noImplicitAny": true,
     "types": [
-      "jest",
-      "es6"
+      "jest"
     ],
     "baseUrl": ".",
     "paths": {
