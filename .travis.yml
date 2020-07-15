@@ -1,14 +1,16 @@
 language: node_js
 node_js:
-- '11'
+  - '11'
 script:
-- npm run test:coverage
-- codecov ./coverage/clover.xml
+  - npm run test:coverage
+  - codecov ./coverage/clover.xml
 branches:
   only:
-  - master
-  - develop
-  - "/^v\\d+\\.\\d+\\.\\d+.*$/"
+    - master
+    - develop
+    - "/^v\\d+\\.\\d+\\.\\d+.*$/"
+before_deploy:
+  - npm run build
 deploy:
   provider: npm
   email: iceprosurface@gmail.com
