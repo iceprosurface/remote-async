@@ -1,21 +1,21 @@
 language: node_js
 node_js:
-  - '11'
+- '11'
 script:
-  - npm run test:coverage
-  - codecov ./coverage/clover.xml
+- npm run test:coverage
+- codecov ./coverage/clover.xml
 branches:
   only:
-    - master
-    - develop
-    - "/^v\\d+\\.\\d+\\.\\d+.*$/"
+  - master
+  - develop
+  - "/^v\\d+\\.\\d+\\.\\d+.*$/"
 before_deploy:
-  - npm run build
+- npm run build
 deploy:
   provider: npm
   email: iceprosurface@gmail.com
   api_key:
-    secure: BmoZJcdyIBtkudiKiRgIil/VfarXB6DZTNPcxIGT0phBXcdlvi/YLiLVHOrOGFiwjnj0a8OUpmzbDb4seu/RqGodR4tl5hatV/E7ooXPeeOd7R7Bz3ILTeKHmgs4zLTjLzliOSuVPocvIWAYNFKYBJGDkXBOCQ62KLV6ko3NdlHSp0y0NRYfqD/x9BApMJ3aXkqRlDD4oan6KCDl04ZZ/SYmrYObI9wpVQsT1jTyQrMjuTkRIeNO5vgIFXtWGsKeD0bYznSxwIzMqnoAWfabC2n3fsOTuaJDYNlxvSJZjMAW5Wu0veo0NeDQLTD+Exx7uBXpx9dwoOumBbApNNiegA0Hf/ug9tk6bNhKNwOsRY/liQ730pYh9iOzMaq+o12LyyrHd94zTE/SfRz+sBqOu90JdDnOxQleFvMdJ8hu51rnehidufs/tNkY1fIs1EVMPviFpkQQoG3h/5iA0L0tWy3w7zQeVxfYsxgxOGIYhmF7Xg/7oVv/EEYVm/JG7YaCF3B30dmFh02s3VaOtwdiELUcdm7ZLrysCJEC9xBfeLgCgnvtYUCQRdnw/ugwFl6cW26tpO1YXPuJ2tLiFoqOK3QtSNYONjlV5OePRyYKYVabmq4aI40rso1KMysV753bfRrA58w7aTb3FnzQG8qLbTc03Aat74EcuUUXqUD3toc=
+    secure: qjygfU0NFK7SkY3kg6muyXvWw8BhcTYqMgQP9skXavqVf0maoybkKrv8iqsHyIgvWsMkz00iAMfMyEdm36QnS4lbFS8x9CLn/PB7TzH9yijAyMUyq60T4QPC+i5cfT+cmwAzk9Gf26GfVFx+HFU90pH6YrQnRZ+Ghc5t27XRWFaU7PSvZSYP3Gpukv8Ugk+TxQm9qWHe5TORlpVHzEoSHIWMEIcnaPd3JZ9FMVVTZuJ50IjG5YwvMawl2QoV78RdP1iJYOYvakCWg7SO6NY5JnZwwMr1/xlbX/2Rw8TVaEtoazx2fj8Kw+D7QoCFwDHt05aNlPE70kw9VZHbt1uqzFNinxiCskSXuhnRcePrekO34D7e3EEyc9Uf43KF5gQWVuCqqdi1m0rkX4QfL7fAxJer2XnScWT1crvjBIpC2rjZGYnWSD5AAq91ZWqFMG1mPn3Fw5KxBEv+xbO8HtlobKB5CSkabOxbkNZM9tmTMNGiuS6lfbka4tOyd5HsulIB0oou+o2Suobwem+7S08uq3hHJWn6q+47QJzY3aNkXcoIc1ynK7xC279hWaue891oq+RNpBEqaJw6IxjSHwh1btUll/TYJwNvWFYekofiRYQXWtj529qpER+CMjEgJlFb+xG8WkSbT0Z+occ25g8l1dscAmv3Y1HR/oHMSE7kbDc=
   on:
     tags: true
     repo: iceprosurface/remote-async
