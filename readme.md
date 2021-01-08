@@ -2,13 +2,23 @@
 
 [![Build Status](https://travis-ci.org/iceprosurface/remote-async.svg?branch=master)](https://travis-ci.org/iceprosurface/remote-async) [![codecov](https://codecov.io/gh/iceprosurface/remote-async/branch/master/graph/badge.svg)](https://codecov.io/gh/iceprosurface/remote-async)
 
+## install
+
+```
+# npm
+npm i remote-async
+# yarn
+yarn add remote-async
+```
+
 ## why
 
-This is a lib for use promise under the protocol like socket(just like a normal request under http).
+This is a lib for using promise under the protocol like socket(just like a normal request under http).
 
 It has been specified a simple format between service and use a system like Subscribers - Publishers to get update)
 
-The server can be use under any protocol like socket，web worker event .etc
+The server can be use under any protocol like socket, web worker event etc.
+
 
 ## how to use
 
