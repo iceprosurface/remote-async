@@ -34,6 +34,7 @@ const { onGlobalStateChange, setGlobalState } = initGlobalState({
 
 const serverMain = new Server();
 serverMain.listen('do-something', (d, resolve, reject) => {
+  // if client send data { a: 1}, send resolve({ b:2 })
   if (d.a === 1) {
     resolve({ b: 2 });
   } else {
@@ -41,10 +42,12 @@ serverMain.listen('do-something', (d, resolve, reject) => {
   }
 });
 serverMain.registerSender((data) => {
+  // define where to send data to client
   setGlobalState({ asyncData: data });
 });
 
 onGlobalStateChange((value, prev) => {
+  // define where to receiveData from client
   serverMain.receiveData(value.asyncData);
 });
 ```
@@ -73,10 +76,11 @@ function storeTest(props) {
       },
     });
 }
-// to use in any vue
+// to use in any vue component
 export default {
   methods: {
       async click() {
+        // just like axios 
         const data = await ServerClient.registerPromise('do-something', { a: 1 });
         // should be {b: 2} 
         console.log(data);
@@ -129,7 +133,7 @@ socket.on('connection', (socket) => {
 ```
 
 
-## api referance
+## Api Reference
 
 ### Server.receiveData(data: RemoteData)
 

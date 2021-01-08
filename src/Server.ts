@@ -80,7 +80,7 @@ export class Server {
   registerSender(sender: (data: RemoteData) => void) {
     this.sender = sender;
   }
-  registerPromise<T = any>(target: string, data: any): Promise<T> {
+  registerPromise<T = any>(target: string, data?: any): Promise<T> {
     const uuid = uuidv4();
     let resolver = () => {};
     let ejector = () => {};
@@ -97,7 +97,7 @@ export class Server {
     this.sender({
       promiseType: PROMISE_TYPE.pending,
       uuid,
-      data: this.dataStringify(data),
+      data: this.dataStringify(typeof data === 'undefined' || data === null ? {} : data),
       target,
     });
     return promise;
