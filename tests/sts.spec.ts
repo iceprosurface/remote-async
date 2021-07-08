@@ -59,7 +59,7 @@ describe('remoteAsync:server to server', () => {
     return new Promise((resolve) => {
       window.console.error = (t) => {
         expect(t).toBe('[async-remote] server should never get pending, check receive function is correct or not.');
-        resolve();
+        resolve("");
       };
       serverMain.listen('c2', (a, b, c, remoteData) => {
         serverMain.sender({

@@ -4,7 +4,7 @@ import { PROMISE_TYPE } from '../src/promiseType';
 describe('remoteAsync:inner test', () => {
   test('no sender', async () => {
     window.console.warn = (t) => {
-      expect(t).toBe('[async remote]: u should add a sender to send data to remote;');
+      expect(t).toBe('[async remote]: you should add a sender to send data to remote;');
     };
     const listener = new Server();
     listener.registerPromise('dataSend', { a: 1 });
