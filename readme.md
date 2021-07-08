@@ -1,6 +1,6 @@
 ## remote async
 
-[![Build Status](https://www.travis-ci.com/iceprosurface/remote-async.svg?branch=master)](https://travis-ci.org/iceprosurface/remote-async) [![codecov](https://codecov.io/gh/iceprosurface/remote-async/branch/master/graph/badge.svg)](https://codecov.io/gh/iceprosurface/remote-async)
+[![Build Status](https://github.com/iceprosurface/remote-async/actions/workflows/merge.yml/badge.svg)](https://github.com/iceprosurface/remote-async/actions/workflows/merge.yml) [![codecov](https://codecov.io/gh/iceprosurface/remote-async/branch/master/graph/badge.svg)](https://codecov.io/gh/iceprosurface/remote-async)
 
 ## install
 
