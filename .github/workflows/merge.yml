@@ -21,4 +21,4 @@ jobs:
       - run: npm run build
       - run: npm run test
       - run: npm run test:coverage
-      - run: codecov ./coverage/clover.xml
+      - run: npm run codecov

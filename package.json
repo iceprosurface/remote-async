@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --verbose",
     "test:coverage": "jest --coverage",
+    "codecov": "codecov ./coverage/clover.xml",
     "build": "rollup -c"
   },
   "types": "./lib/index.d.ts",
