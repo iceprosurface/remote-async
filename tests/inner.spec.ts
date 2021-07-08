@@ -1,17 +1,15 @@
-import { Server } from "../src";
-import { PROMISE_TYPE } from "../src/promiseType";
+import { Server } from '../src';
+import { PROMISE_TYPE } from '../src/promiseType';
 
-describe("remoteAsync:inner test", () => {
-  test("no sender", async () => {
+describe('remoteAsync:inner test', () => {
+  test('no sender', async () => {
     window.console.warn = (t) => {
-      expect(t).toBe(
-        "[async remote]: u should add a sender to send data to remote;"
-      );
+      expect(t).toBe('[async remote]: u should add a sender to send data to remote;');
     };
     const listener = new Server();
-    listener.registerPromise("dataSend", { a: 1 });
+    listener.registerPromise('dataSend', { a: 1 });
   });
-  test("register a promise & receiveData", async () => {
+  test('register a promise & receiveData', async () => {
     const listener = new Server();
     const object = { a: 1 };
     const retObject = { b: 2 };
@@ -31,12 +29,12 @@ describe("remoteAsync:inner test", () => {
       }, 50);
     });
     count++;
-    let returnedValue = await listener.registerPromise("dataSend", object);
+    let returnedValue = await listener.registerPromise('dataSend', object);
     expect(count).toBe(3);
     expect(returnedValue).toEqual(retObject);
   });
 
-  test("reject data", async () => {
+  test('reject data', async () => {
     const listener = new Server();
     const object = { a: 1 };
     let retObject = { b: 2 };
@@ -50,22 +48,20 @@ describe("remoteAsync:inner test", () => {
         });
       }, 50);
     });
-    const retData = await listener
-      .registerPromise("dataSend", object)
-      .catch((d) => Promise.resolve({ v: 1, d }));
+    const retData = await listener.registerPromise('dataSend', object).catch((d) => Promise.resolve({ v: 1, d }));
     expect(retData).toEqual({ v: 1, d: retObject });
   });
-  test("off cb", async () => {
+  test('off cb', async () => {
     const listener = new Server();
-    const cb1 = () => "k";
-    const cb2 = () => "g";
-    listener.listen("k", cb1);
+    const cb1 = () => 'k';
+    const cb2 = () => 'g';
+    listener.listen('k', cb1);
     expect(listener.listeners.k[0]).toBe(cb1);
-    listener.off("k", cb1);
-    listener.listen("k", cb1);
-    listener.listen("k", cb2);
+    listener.off('k', cb1);
+    listener.listen('k', cb1);
+    listener.listen('k', cb2);
     expect(listener.listeners.k.length).toBe(2);
-    listener.off("k");
+    listener.off('k');
     expect(listener.listeners.k.length).toBe(0);
   });
 });

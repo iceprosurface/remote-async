@@ -15,7 +15,7 @@ yarn add remote-async
 
 This is a lib for using promise under the protocol like socket(just like a normal request under http).
 
-It has been specified a simple format between service and use a system like Subscribers - Publishers to get update)
+It has been specified a simple format between service and use a system like Subscribers - Publishers to get update.
 
 The server can be use under any protocol like socket, web worker event etc.
 

@@ -1,9 +1,9 @@
 module.exports = {
   // verbose: true,
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    '^.+\\.tsx?$': 'ts-jest',
   },
-  reporters: ["default"],
+  reporters: ['default'],
   coverageThreshold: {
     global: {
       branches: 69,
@@ -12,6 +12,6 @@ module.exports = {
       statements: 70,
     },
   },
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };
