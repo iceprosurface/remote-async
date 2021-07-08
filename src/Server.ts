@@ -99,7 +99,7 @@ export class Server {
   /**
    * Register a promise and pass to anther server which listen `target` path.
    */
-  registerPromise<T = any>(target: string, data?: any): Promise<T> {
+  registerPromise<T = any, Payload = any>(target: string, data?: Payload): Promise<T> {
     const uuid = uuidv4();
     let resolver: (value: T | PromiseLike<T>) => void = () => {};
     let ejector = () => {};
