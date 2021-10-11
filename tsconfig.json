@@ -3,7 +3,7 @@
     "sourceMap": true,
     "esModuleInterop": true,
     // 模块配置
-    "module": "ESNext",
+    "module": "ES2015",
     // 是否默认禁用 any
     "noImplicitAny": true,
     "types": ["jest"],
