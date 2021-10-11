@@ -3,7 +3,7 @@
     "sourceMap": true,
     "esModuleInterop": true,
     // 模块配置
-    "module": "ES2015",
+    "module": "ESNext",
     // 是否默认禁用 any
     "noImplicitAny": true,
     "types": ["jest"],
@@ -12,7 +12,7 @@
       "~/*": ["./types/*"]
     },
     // 编译目标
-    "target": "es6",
+    "target": "ESNext",
     // 输出目录
     "outDir": "dist",
     // 是否自动创建类型声明
