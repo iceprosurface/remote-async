@@ -22,7 +22,90 @@ The server can be use under any protocol like socket, web worker event etc.
 
 ## how to use
 
+### iframe event
+
+
+```ts
+import { Server } from "remote-async";
+export const ServerClient = new Server();
+const iframe = document.getElementById('iframe')
+const ORIGIN = 'some-origin'
+window.addEventListener('message', (event) => {
+  if ((event.origin || event.originalEvent.origin) !== ORIGIN) {
+    // for security, host must match
+    return;
+  }
+  if (event.data.type === 'promise') {
+    ServerClient.receiveData(event.data.data);
+  }
+}, false);
+ServerClient.registerSender((data) => {
+  iframe.contentWindow?.postMessage({ data, type: 'promise' }, ORIGIN)
+})
+
+ServerClient.listen('anything', (data, resolve, reject) => {
+  // do anything
+})
+ServerClient.registerPromise('do-something')
+```
+
+The script should be same as previous code in iframe.After this, protocol is completely duplex communication under 
+`postMessage`.
+
+### figma plugin
+
+Figma plugin usage was similar to iframe event usage.
+
+```ts
+// message front
+import { Server } from "remote-async";
+export const ServerClient = new Server();
+ServerClient.registerSender((data) =>
+  parent.postMessage(
+    {
+      pluginMessage: {
+        type: "promise",
+        data,
+      },
+    },
+    "*"
+  )
+);
+
+window && (window.onmessage = (event) => {
+  const message = event.data.pluginMessage;
+  if (message.type === "promise") {
+    ServerClient.receiveData(message.data);
+  }
+});
+
+ServerClient.registerPromise('do-something');
+```
+
+```ts
+// field `main` in manifest.json 
+export const serverMain = new Server();
+serverMain.registerSender((data) => {
+  figma.ui.postMessage({
+    type: "promise",
+    data: data,
+  });
+});
+
+figma.ui.onmessage = (message) => {
+  if (message.type === "promise") {
+    serverMain.receiveData(message.data);
+  }
+};
+// listen event from front 
+serverMain.listen('do something', async (data, resolve, reject) => {
+  // do something
+});
+```
+
 ### qiankun
+
+qiankun did not have any events for communication, but wo can use `onGlobalStateChange` and `setGlobalState` to simulate event.
 
 ```javascript
 // main/index.js
