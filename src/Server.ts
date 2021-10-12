@@ -17,10 +17,10 @@ export class Server {
   protected promiseMap: {
     [key: string]: RemoteAsyncObject<any>;
   } = {};
-  private get dataParser() {
+  protected get dataParser() {
     return JSON.parse;
   }
-  private get dataStringify() {
+  protected get dataStringify() {
     return JSON.stringify;
   }
   /**
