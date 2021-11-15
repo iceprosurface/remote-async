@@ -34,6 +34,16 @@ describe('remoteAsync:inner test', () => {
     expect(returnedValue).toEqual(retObject);
   });
 
+  test('timeout', async () => {
+    const defer = (time: number) => new Promise((resolve) => setTimeout(resolve, time));
+    const listener = new Server({ timeout: 5 });
+    listener.registerSender(() => {});
+    await expect(() => listener.registerPromise('dataSend', { a: 1 })).rejects.toThrowError('ErrorTimeout');
+    await expect(
+      Promise.race([listener.registerPromise('dataSend', { a: 2 }, { timeout: 20 }), defer(30)]),
+    ).rejects.toThrowError('ErrorTimeout');
+  });
+
   test('reject data', async () => {
     const listener = new Server();
     const object = { a: 1 };

@@ -13,7 +13,9 @@ export type RemoteCallBack = (
   reject?: (ret: any) => void,
   remoteData?: RemoteData,
 ) => any;
+export const NO_TIMEOUT = -1;
 export class Server {
+  constructor(private readonly setting: { timeout: number } = { timeout: NO_TIMEOUT }) {}
   protected promiseMap: {
     [key: string]: RemoteAsyncObject<any>;
   } = {};
@@ -99,10 +101,10 @@ export class Server {
   /**
    * Register a promise and pass to anther server which listen `target` path.
    */
-  registerPromise<T = any, Payload = any>(target: string, data?: Payload): Promise<T> {
+  registerPromise<T = any, Payload = any>(target: string, data?: Payload, option?: { timeout: number }): Promise<T> {
     const uuid = uuidv4();
     let resolver: (value: T | PromiseLike<T>) => void = () => {};
-    let ejector = () => {};
+    let ejector = (params: any) => {};
     const promise = new Promise<T>((resolve, reject) => {
       resolver = resolve;
       ejector = reject;
@@ -114,6 +116,10 @@ export class Server {
       data: this.dataStringify(typeof data === 'undefined' || data === null ? {} : data),
       target,
     });
+    const timeout = option?.timeout ?? this.setting.timeout ?? NO_TIMEOUT;
+    if (timeout !== NO_TIMEOUT && timeout >= 0) {
+      setTimeout(() => ejector(new Error('ErrorTimeout')), timeout);
+    }
     return promise;
   }
 }

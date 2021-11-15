@@ -218,6 +218,10 @@ socket.on('connection', (socket) => {
 
 ## Api Reference
 
+### constructor(setting: { timeout: number })
+
+`timeout` default timeout setting
+
 ### Server.receiveData(data: RemoteData)
 
 Receive a remote data from another server.
@@ -231,7 +235,7 @@ Add a listener on `target` path, which will call `callback` when `receiveData` w
 
 Remove listener on target. This will remove all callbacks when callback params was not set.
 
-### Server.registerPromise(target: string, data: any)
+### Server.registerPromise(target: string, data: any, option: { timeout: number })
 
 Register a promise and pass to anther server which listen `target` path.
 
