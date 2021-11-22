@@ -35,7 +35,10 @@ export default [
   },
   {
     input,
-    plugins,
+    plugins: [
+      ...plugins,
+      getBabelOutputPlugin({ presets: [['@babel/env']],  allowAllFormats: true, }),
+    ],
     output: {
       format: 'es',
       file: 'lib/remoteAsync.esm.js',
