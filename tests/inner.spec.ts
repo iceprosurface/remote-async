@@ -1,4 +1,5 @@
 import { Server } from '../src';
+import { RemoteCallBack } from '../src/Server';
 import { PROMISE_TYPE } from '../src/promiseType';
 
 describe('remoteAsync:inner test', () => {
@@ -61,6 +62,26 @@ describe('remoteAsync:inner test', () => {
     const retData = await listener.registerPromise('dataSend', object).catch((d) => Promise.resolve({ v: 1, d }));
     expect(retData).toEqual({ v: 1, d: retObject });
   });
+  test('listen callback multiple times', async () => {
+    const listener = new Server();
+    listener.registerSender((data) => listener.receiveData(data));
+    const cb1 = jest.fn(((data, resolve) => {
+      // only first resolve or reject will be accepted when multiple callbacks
+      console.log('cb1', data);
+      resolve?.({ a: 1 });
+      expect(resolve).not.toEqual(undefined);
+    }) as RemoteCallBack);
+    const cb2 = jest.fn(((data, resolve ,reject) => {
+      // no effect
+      reject?.({ a: 1 });
+      expect(reject).not.toEqual(undefined);
+    }) as RemoteCallBack);
+    listener.listen('k', cb1);
+    listener.listen('k', cb2);
+    await listener.registerPromise('k', { a: 1 });
+    expect(cb1).toBeCalledTimes(1);
+    expect(cb2).toBeCalledTimes(1);
+  })
   test('off cb', async () => {
     const listener = new Server();
     const cb1 = () => 'k';
