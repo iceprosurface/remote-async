@@ -2,25 +2,27 @@
 
 [![Build Status](https://github.com/iceprosurface/remote-async/actions/workflows/merge.yml/badge.svg)](https://github.com/iceprosurface/remote-async/actions/workflows/merge.yml) [![codecov](https://codecov.io/gh/iceprosurface/remote-async/branch/master/graph/badge.svg)](https://codecov.io/gh/iceprosurface/remote-async)
 
-## install
+## Installation
 
 ```
-# npm
+# Using npm
 npm i remote-async
-# yarn
+# Using yarn
 yarn add remote-async
+# Using pnpm
+pnpm add remote-async
 ```
 
-## why
+## Why use remote-async?
 
-This is a lib for using promise under the protocol like socket(just like a normal request under http).
+This library allows the use of promises over protocols like sockets (similar to a standard HTTP request).
 
-It has been specified a simple format between service and use a system like Subscribers - Publishers to get update.
+It utilizes a simple format for communication between services and employs a Subscribers-Publishers system for updates.
 
-The server can be use under any protocol like socket, web worker event etc.
+The server can operate over any protocol, such as sockets, web workers, events, etc.
 
 
-## how to use
+## Usage
 
 ### iframe event
 
@@ -32,7 +34,7 @@ const iframe = document.getElementById('iframe')
 const ORIGIN = 'some-origin'
 window.addEventListener('message', (event) => {
   if ((event.origin || event.originalEvent.origin) !== ORIGIN) {
-    // for security, host must match
+    // For security reasons, the host must match.
     return;
   }
   if (event.data.type === 'promise') {
@@ -44,17 +46,16 @@ ServerClient.registerSender((data) => {
 })
 
 ServerClient.listen('anything', (data, resolve, reject) => {
-  // do anything
+  // Perform any action.
 })
 ServerClient.registerPromise('do-something')
 ```
 
-The script should be same as previous code in iframe.After this, protocol is completely duplex communication under 
-`postMessage`.
+The script should be identical to the previous code within the iframe. After this, the protocol facilitates full duplex communication via postMessage
 
-### figma plugin
+### Figma plugin
 
-Figma plugin usage was similar to iframe event usage.
+Usage within a Figma plugin is similar to that of iframe events.
 
 ```ts
 // message front
@@ -83,7 +84,7 @@ ServerClient.registerPromise('do-something');
 ```
 
 ```ts
-// field `main` in manifest.json 
+// Field `main` in manifest.json 
 export const serverMain = new Server();
 serverMain.registerSender((data) => {
   figma.ui.postMessage({
@@ -97,15 +98,15 @@ figma.ui.onmessage = (message) => {
     serverMain.receiveData(message.data);
   }
 };
-// listen event from front 
+// Listen for events from the front.
 serverMain.listen('do something', async (data, resolve, reject) => {
-  // do something
+  // Perform any action.
 });
 ```
 
 ### qiankun
 
-qiankun did not have any events for communication, but wo can use `onGlobalStateChange` and `setGlobalState` to simulate event.
+qiankun does not have native events for communication, but we can use onGlobalStateChange and setGlobalState to simulate events.
 
 ```javascript
 // main/index.js
@@ -117,7 +118,7 @@ const { onGlobalStateChange, setGlobalState } = initGlobalState({
 
 const serverMain = new Server();
 serverMain.listen('do-something', (d, resolve, reject) => {
-  // if client send data { a: 1}, send resolve({ b:2 })
+  // If client sends data { a: 1}, send resolve({ b: 2 })
   if (d.a === 1) {
     resolve({ b: 2 });
   } else {
@@ -125,18 +126,18 @@ serverMain.listen('do-something', (d, resolve, reject) => {
   }
 });
 serverMain.registerSender((data) => {
-  // define where to send data to client
+  // Define where to send data to the client.
   setGlobalState({ asyncData: data });
 });
 
 onGlobalStateChange((value, prev) => {
-  // define where to receiveData from client
+  // Define where to receive data from the client.
   serverMain.receiveData(value.asyncData);
 });
 ```
 
 ```javascript
-// single spa
+// Single spa
 export const ServerClient = new Server();
 function storeTest(props) {
   if (props.onGlobalStateChange) {
@@ -159,13 +160,13 @@ function storeTest(props) {
       },
     });
 }
-// to use in any vue component
+// To use in any Vue component
 export default {
   methods: {
       async click() {
-        // just like axios 
+        // Similar to using axios
         const data = await ServerClient.registerPromise('do-something', { a: 1 });
-        // should be {b: 2} 
+        // Should return {b: 2}
         console.log(data);
       },
   }
@@ -175,7 +176,7 @@ export default {
 ### socket
 
 ```javascript
-// server
+// Server
 var io = require('socket.io')(http);
 var { Server } = require('remote-async');
 const serverMain = new Server();
@@ -193,7 +194,7 @@ io.on('connection', (socket) => {
 ```
 
 ```javascript
-// client
+// Client
 import { Server } from 'remote-async';
 const serverClient = new Server();
 const socket = io();
@@ -202,12 +203,12 @@ socket.on('connection', (socket) => {
         serverClient.receiveData(data);
     });
     serverClient.registerSender((data) => socket.emit('async-data', data));
-    // do a promise
+    // Execute a promise.
     serverClient.registerPromise('do-something', {a: 1})
         .then((d) => {
-            // it will return here
+            // It will return here.
             console.log(d);
-            // {b: 2}
+            // Should be {b: 2}.
         })
     socket.on('disconnect', () => {
         console.log('user disconnected');
@@ -220,7 +221,7 @@ socket.on('connection', (socket) => {
 
 ### constructor(setting: { timeout: number })
 
-`timeout` default timeout setting
+`timeout`: Default timeout setting.
 
 ### Server.receiveData(data: RemoteData)
 
@@ -229,18 +230,18 @@ Receive a remote data from another server.
 
 ### Server.listen(target: string, callback: RemoteCallBack)
 
-Add a listener on `target` path, which will call `callback` when `receiveData` was called by any conditions.
+Add a listener on `target` path, which will call `callback` when `receiveData` is invoked under any circumstances.
 
 ### Server.off(target: string, callback?: any)
 
-Remove listener on target. This will remove all callbacks when callback params was not set.
+Remove listener on target. This will remove all callbacks when the callback parameter is not set.
 
 ### Server.registerPromise(target: string, data: any, option: { timeout: number })
 
-Register a promise and pass to anther server which listen `target` path.
+Registers a promise and sends it to another server listening on the `target` path.
 
 
 ### Server.registerSender(sender: (data: RemoteData) => void)
 
-Define the server sender how to pass a promise to another server
+Defines how the server sender should pass a promise to another server.
 
